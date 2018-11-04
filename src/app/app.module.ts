@@ -9,6 +9,11 @@ import { RecipesDetailComponent } from './recipes/recipes-detail/recipes-detail.
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
 import { RecipesItemComponent } from './recipes/recipes-list/recipes-item/recipes-item.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+import { Ingredient } from './shared/ingredient.model';
+import { ingridientsService } from './services/ingredients.service';
+import { AppRoutingModule } from './app-routing.module';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipesEditComponent } from './recipes-edit/recipes-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +24,15 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
     RecipesDetailComponent,
     RecipesListComponent,
     RecipesItemComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    RecipeStartComponent,
+    RecipesEditComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [ingridientsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
