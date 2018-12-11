@@ -1,15 +1,10 @@
-  <div class="card testimonial-card">
-      <!--Background color-->
-      <div class="card-up sunny-morning-gradient">
-      </div>
-      <!--Avatar-->
-      <div class="avatar mx-auto"
-routerLinkActive="active"
-[routerLink]="[index]"
-      ><img [src]="recipe.imagePath"  width="300px" class="rounded-circle img-responsive" alt="Example photo" style="cursor: pointer;">
-      </div>
-      <div class="card-body">
-          <h4 class="card-title mt-1">{{recipe.name}}</h4>
-          <hr>
-          <p><i class="fa fa-quote-left"></i>{{recipe.description}}</p>
-      </div>
+<a style="cursor: pointer" class="list-group-item list-group-item-action clearfix" [routerLink]="[index]" 
+routerLinkActive="active">
+  <div class="float-left">
+    <h4>{{recipe.name}}</h4>
+    <p>{{recipe.description}}</p>
+  </div>
+  <span class="float-right" >
+    <img width="180px"  class="img-fluid" [src]="recipe.imagePath"alt="">
+  </span>
+</a>

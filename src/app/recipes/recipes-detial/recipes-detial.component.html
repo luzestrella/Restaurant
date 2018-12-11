@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <h1>{{recipe.name}}</h1>
+    <h1>{{recipe.name}}</h1> 
   </div>
 </div>
 <div class="row">
@@ -17,22 +17,28 @@
       <div class="dropdown-menu">
         <a style="cursor:pointer;" class="dropdown-item" (click)="onAddToShoppingList()">To shopping List</a>
         <a style="cursor:pointer;" class="dropdown-item" (click)="onEditRecipe()">Edit Recipes</a>
-        <a style="cursor:pointer;" class="dropdown-item" >Delete Recipe</a>
+        <a style="cursor:pointer;" class="dropdown-item" (click)="onDeleteRecipe()">Delete Recipe</a>
       </div>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-12">
-    {{recipe.description}}
+    Description
+  </div>
+  
+  <div class="col-12">
+    <h1>{{recipe.description}}</h1>
   </div>
 </div>
 <div class="row">
   <div class="col-12">
+    Ingredients
+  </div>
+  <div class="col-12">
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
-        {{ingredient.name}}({{ingredient.amount}})
-      </li>
+        {{ingredient.name}} ({{ingredient.amount}})      </li>
     </ul>
   </div>
 </div>

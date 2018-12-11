@@ -1,42 +1,49 @@
-import { Recipes } from "../recipes/Recipes.model";
+import { Recipe } from "../recipes/recipes.model";
 import { EventEmitter, Injectable } from "@angular/core";
-import { Ingredient } from "../shared/ingredient.model";
-import { ingridientsService } from "./ingredients.service";
-import { TouchSequence } from "selenium-webdriver";
+import { Ingredient } from "../shared/ingredients.model";
+import { IngredientsService } from "./Ingredients.service";
+import { Subject } from "rxjs";
 
+@Injectable()
+export class
+  RecipeService {
+  //recipeSelected = new EventEmitter<Recipe>();
 
-@Injectable()//
-export class RecipeService {
+  RecipeEmit = new Subject<Recipe[]>();
+  RecipeEditing = new Subject<number>();
+  private recipes: Recipe[] = [
+    new Recipe('Pastel',
+      'pastel de fresa',
+      'https://cdn2.cocinadelirante.com/sites/default/files/images/2017/06/pastelnapolitano.jpg',
+      [new Ingredient('fresa', 2),
+      new Ingredient('nuez', 4)]),
 
-    //recipeSelected = new EventEmitter<Recipes>();
+    new Recipe('Pastel1', 'pastel grande',
+      'https://cdn2.cocinadelirante.com/sites/default/files/images/2017/06/pastelnapolitano.jpg',
+      [new Ingredient('zarzamora', 2), new Ingredient('durazno', 4), new Ingredient('nuez', 5)])
+  ];
+  getRecipes() {
+    return this.recipes.slice();
+  }
+  constructor(private ingredientsService: IngredientsService) {
 
-    private recipes: Recipes[] = [
-        new Recipes('Pastel', 'This is a simply test', 'https://cdn2.cocinadelirante.com/sites/default/files/images/2017/06/pastelnapolitano.jpg',
-            [ 
-            new Ingredient('fresa',2),
-            new Ingredient('cereza',2)
-            ]
-        ),
-        new Recipes('Pastel 1', 'This is a simply test', 'https://cdn2.cocinadelirante.com/sites/default/files/images/2017/06/pastelnapolitano.jpg', [ 
-            new Ingredient('durazno',2),
-            new Ingredient('apple',2)
-            ]),
-        
-        new Recipes('Pastel 2', 'This is a simply test', 'https://cdn2.cocinadelirante.com/sites/default/files/images/2017/06/pastelnapolitano.jpg', [ 
-            new Ingredient('orange',2),
-            new Ingredient('fresa',2)
-            ])
-    ];
-    constructor(private ingredientsService: ingridientsService){
+  }
+  getRecipe(index: number) {
+    return this.recipes[index];
+  }
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.ingredientsService.addIngredients(ingredients);
+  }
+  DeleteRecipe(){
+    
+  }
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.RecipeEmit.next(this.recipes.slice());
+  }
+  updateRecipe(index: number, recipe: Recipe) {
+    this.recipes[index] = recipe;
+    this.RecipeEmit.next(this.recipes.slice());
+  }
 
-    }
-    getRecipes() {
-        return this.recipes.slice();
-    }
-    addIngredientsToShoppingList(ingredients: Ingredient[]){
-        this.ingredientsService.addIngredients(ingredients);
-    }
-    getRecipe(index : number){
-        return this.recipes[index];
-    }
 }
